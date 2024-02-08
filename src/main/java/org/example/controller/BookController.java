@@ -3,7 +3,6 @@ package org.example.controller;
 import org.example.dto.Book;
 import org.example.entity.BookEntity;
 import org.example.service.BookService;
-import org.example.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/book")
+@CrossOrigin
 public class BookController {
     @Autowired
     BookService service;
@@ -25,10 +25,9 @@ public class BookController {
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> deleteBook(@PathVariable Long id){
-        return service.deleteBook(id) ?
-                ResponseEntity.ok("Deleted")
-                : ResponseEntity.notFound().build();
+    public String deleteBook(@PathVariable Long id){
+        service.deleteBook(id);
+        return "Deleted";
     }
     @GetMapping("search/{id}")
     public Book getBookById(@PathVariable Long id){
