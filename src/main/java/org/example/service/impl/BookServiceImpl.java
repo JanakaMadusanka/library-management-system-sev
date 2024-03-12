@@ -8,6 +8,7 @@ import org.example.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +47,14 @@ public class BookServiceImpl implements BookService {
     public Book getBookById(Long id) {
         Optional<BookEntity> byId = repository.findById(id);
         return mapper.map(byId, Book.class);
+    }
+
+    @Override
+    public void addList(List<Book> bookList) {
+        List<BookEntity> entities = new ArrayList<>();
+        bookList.forEach(book -> {
+            entities.add(mapper.map(book,BookEntity.class));
+        });
+        repository.saveAll(entities);
     }
 }

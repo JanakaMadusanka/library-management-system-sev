@@ -1,6 +1,5 @@
 package org.example.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +13,5 @@ public class Book {
     private String title;
     private String author;
     private String category;
-    private Integer Address;
-
+    private Integer qty;
 }
